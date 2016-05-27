@@ -16,10 +16,10 @@ class TestPendingManager(object):
         # Setup
         token_1 = AccountActionTokenFactory.create()
         token_2 = AccountActionTokenFactory.create()
-        token_2._meta.get_field_by_name('created')[0].auto_now_add = False
+        token_2._meta.get_field('created').auto_now_add = False
         token_2.created = timezone.now() - dt.timedelta(days=100)
         token_2.save()
-        token_2._meta.get_field_by_name('created')[0].auto_now_add = True
+        token_2._meta.get_field('created').auto_now_add = True
         # Run
         tokens = AccountActionToken.pending_objects.all()
         # Check
@@ -33,16 +33,16 @@ class TestPendingManager(object):
             username='test2', password='not_secret', email='test2@exampe.com')
         token_1 = AccountActionTokenFactory.create(content_object=user_1)
         token_2 = AccountActionTokenFactory.create(content_object=user_1)
-        token_2._meta.get_field_by_name('created')[0].auto_now_add = False
+        token_2._meta.get_field('created').auto_now_add = False
         token_2.created = timezone.now() - dt.timedelta(days=100)
         token_2.save()
-        token_2._meta.get_field_by_name('created')[0].auto_now_add = True
+        token_2._meta.get_field('created').auto_now_add = True
         AccountActionTokenFactory.create(content_object=user_2)
         token_4 = AccountActionTokenFactory.create(content_object=user_2)
-        token_4._meta.get_field_by_name('created')[0].auto_now_add = False
+        token_4._meta.get_field('created').auto_now_add = False
         token_4.created = timezone.now() - dt.timedelta(days=100)
         token_4.save()
-        token_4._meta.get_field_by_name('created')[0].auto_now_add = True
+        token_4._meta.get_field('created').auto_now_add = True
         # Run
         tokens = AccountActionToken.pending_objects.get_for_object(user_1)
         # Check

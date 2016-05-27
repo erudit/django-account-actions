@@ -42,10 +42,10 @@ class TestAccountActionToken(object):
         # Setup
         token_1 = AccountActionTokenFactory.create()
         token_2 = AccountActionTokenFactory.create()
-        token_2._meta.get_field_by_name('created')[0].auto_now_add = False
+        token_2._meta.get_field('created').auto_now_add = False
         token_2.created = timezone.now() - dt.timedelta(days=100)
         token_2.save()
-        token_2._meta.get_field_by_name('created')[0].auto_now_add = True
+        token_2._meta.get_field('created').auto_now_add = True
         # Run & check
         assert not token_1.is_expired
         assert token_2.is_expired
@@ -88,10 +88,10 @@ class TestAccountActionToken(object):
     def test_knows_that_an_expired_token_cannot_be_consumed(self):
         # Setup
         token = AccountActionTokenFactory.create()
-        token._meta.get_field_by_name('created')[0].auto_now_add = False
+        token._meta.get_field('created').auto_now_add = False
         token.created = timezone.now() - dt.timedelta(days=100)
         token.save()
-        token._meta.get_field_by_name('created')[0].auto_now_add = True
+        token._meta.get_field('created').auto_now_add = True
         # Run & check
         assert not token.can_be_consumed
 
