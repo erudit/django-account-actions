@@ -2,6 +2,10 @@
 django-account-actions
 ======================
 
+.. image:: http://img.shields.io/travis/erudit/django-account-actions.svg?style=flat-square
+    :target: http://travis-ci.org/erudit/django-account-actions
+    :alt: Build status
+
 *A Django application to define account-related actions in a standardized way.*
 
 .. contents::
@@ -44,3 +48,8 @@ Authors
 Érudit Consortium <tech@erudit.org> and contributors_
 
 .. _contributors: https://github.com/erudit/django-account-actions/graphs/contributors
+
+License
+-------
+
+GNU General Public License v3 (GPLv3). See ``LICENSE`` for more details.
