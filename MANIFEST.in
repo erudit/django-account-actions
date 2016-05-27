@@ -1,0 +1,8 @@
+include LICENSE
+include MANIFEST.in
+include *.rst
+recursive-include account_actions/locale *
+recursive-include account_actions *.html
+recursive-include account_actions/templates *.txt
+global-exclude *.pyc
+recursive-exclude tests *
