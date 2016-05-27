@@ -58,7 +58,7 @@ Usage
 *Django-account-actions* gives you the ability to define such actions by using a registration pattern and a well defined interface.
 
 Defining actions
-----------------
+~~~~~~~~~~~~~~~~
 
 In order to define actions you will have to write a subclass of ``account_actions.action_base.AccountActionBase`` for any action you want to create. These class-based actions must be defined inside an ``account_actions`` Python module in your Django application (just add a file called ``account_actions.py`` to an existing Django application). Finally your class-based action must be registered to the ``account_actions.action_pool.actions`` object by using its ``register`` method to be available to the global actions pool.
 
@@ -95,7 +95,7 @@ The ``account_actions.action_base.AccountActionBase`` class lets you define prec
 * ...
 
 Consuming actions
------------------
+~~~~~~~~~~~~~~~~~
 
 *Django-account-actions* does not provide fully functional views and templates to consume actions. Instead you have to implement your own views using the generic views provided by the ``account_actions.views.generic`` module to define how your actions can be consumed by your users.
 
