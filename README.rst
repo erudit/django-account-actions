@@ -25,13 +25,13 @@ Installation
 
 Just run:
 
-::
+.. code-block:: shell
 
   pip install git+git://github.com/erudit/django-account-actions.git
 
 Once installed you just need to add ``account_actions`` to ``INSTALLED_APPS`` in your project's settings module:
 
-::
+.. code-block:: python
 
   INSTALLED_APPS = (
       # other apps
@@ -69,7 +69,7 @@ Each of these actions must provide a ``name`` and must define an ``execute`` met
 
 Let’s write a simple example. Consider we are trying to write an action that will add users to a specific Django ``Group`` instance. We could write:
 
-::
+.. code-block:: python
 
     # -*- coding utf-8 -*-
 
