@@ -101,7 +101,7 @@ class AccountActionConsumeView(AccountActionTokenMixin, View):
         return self.action.get_consumption_redirect_url(self.object)
 
     def has_permission(self):
-        return self.request.user.is_authenticated() \
+        return self.request.user.is_authenticated \
             and self.action.can_be_consumed(self.get_object(), self.request.user)
 
     def post(self, request, *args, **kwargs):

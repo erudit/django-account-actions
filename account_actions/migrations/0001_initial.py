@@ -27,8 +27,8 @@ class Migration(migrations.Migration):
                 ('email', models.EmailField(max_length=254, verbose_name='E-mail address')),
                 ('action', models.CharField(max_length=100, verbose_name='Action')),
                 ('object_id', models.PositiveIntegerField(null=True, blank=True)),
-                ('content_type', models.ForeignKey(null=True, blank=True, verbose_name='Type', to='contenttypes.ContentType')),
-                ('user', models.ForeignKey(null=True, blank=True, verbose_name='User', to=settings.AUTH_USER_MODEL)),
+                ('content_type', models.ForeignKey(on_delete=models.deletion.CASCADE, null=True, blank=True, verbose_name='Type', to='contenttypes.ContentType')),
+                ('user', models.ForeignKey(on_delete=models.deletion.CASCADE, null=True, blank=True, verbose_name='User', to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'verbose_name_plural': 'Account action tokens',

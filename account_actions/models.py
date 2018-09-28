@@ -33,7 +33,9 @@ class AccountActionToken(models.Model):
     consumption_date = models.DateTimeField(
         verbose_name=_('Consumption date'), blank=True, null=True)
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, verbose_name=_('User'), blank=True, null=True)
+        settings.AUTH_USER_MODEL, verbose_name=_('User'), blank=True, null=True,
+        on_delete=models.CASCADE
+    )
 
     # This is a key used to identify the action
     key = models.CharField(max_length=40, unique=True)
@@ -48,7 +50,10 @@ class AccountActionToken(models.Model):
     # The 'action' field should contain a value identifying the considered action. It can be
     # associated with a content object through a generic foreign key.
     action = models.CharField(max_length=100, verbose_name=_('Action'))
-    content_type = models.ForeignKey(ContentType, verbose_name=_('Type'), blank=True, null=True)
+    content_type = models.ForeignKey(
+        ContentType, verbose_name=_('Type'), blank=True, null=True,
+        on_delete=models.CASCADE
+    )
     object_id = models.PositiveIntegerField(blank=True, null=True)
     content_object = GenericForeignKey('content_type', 'object_id')
 
