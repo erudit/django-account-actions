@@ -10,6 +10,8 @@ class AccountActionTokenAdmin(admin.ModelAdmin):
         'id', 'key', 'email', 'first_name', 'last_name', 'action', 'active', 'expiration_date',
         'is_expired', 'is_consumed', )
     list_display_links = ('id', 'key', 'email', )
+    list_filter = ('action', 'active', )
+    search_fields = ('email', 'first_name', 'last_name', )
 
 
 admin.site.register(AccountActionToken, AccountActionTokenAdmin)
