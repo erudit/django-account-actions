@@ -25,6 +25,16 @@ class TestPendingManager(object):
         # Check
         assert list(tokens) == [token_1, ]
 
+    def test_an_expired_account_action_is_not_pending(self):
+        token_1 = AccountActionTokenFactory()
+        token_1._meta.get_field('created').auto_now_add = False
+        token_1.created = timezone.now() - dt.timedelta(days=100)
+        token_1.save()
+        token_1._meta.get_field('created').auto_now_add = True
+        tokens = AccountActionToken.pending_objects.all()
+
+        assert list(tokens) == []
+
     def test_can_return_the_pending_account_actions_for_a_specific_object(self):
         # Setup
         user_1 = User.objects.create_user(
