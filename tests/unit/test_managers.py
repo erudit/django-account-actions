@@ -7,7 +7,8 @@ from django.utils import timezone
 import pytest
 
 from account_actions.models import AccountActionToken
-from account_actions.test.factories import AccountActionTokenFactory, ExpiredAccountActionTokenFactory
+from account_actions.test.factories import AccountActionTokenFactory, \
+    ExpiredAccountActionTokenFactory
 
 
 @pytest.mark.django_db
@@ -19,13 +20,14 @@ class TestPendingManager(object):
         # Run
         tokens = AccountActionToken.pending_objects.all()
         # Check
-        assert list(tokens) == [token_1, ]
+        assert token_1 in tokens
+        assert token_2 not in tokens
 
     def test_an_expired_account_action_is_not_pending(self):
         token_1 = ExpiredAccountActionTokenFactory()
         tokens = AccountActionToken.pending_objects.all()
 
-        assert list(tokens) == []
+        assert token_1 not in tokens
 
     def test_can_return_the_pending_account_actions_for_a_specific_object(self):
         # Setup

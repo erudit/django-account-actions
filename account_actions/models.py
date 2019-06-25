@@ -68,6 +68,11 @@ class AccountActionToken(models.Model):
     def __str__(self):
         return '{0} - {1}'.format(self.created, self.action)
 
+    def cancel(self):
+        """ Cancels the token. """
+        self.is_canceled = True
+        self.save()
+
     def consume(self, user):
         """ Consumes the token for the given user. """
         self.user = user

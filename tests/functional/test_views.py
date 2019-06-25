@@ -135,10 +135,10 @@ class TestAccountActionConsumeView(object):
         with pytest.raises(PermissionDenied):
             view(request, key=token.key)
 
-    def test_return_an_http_403_error_if_the_token_is_inactive(self):
+    def test_return_an_http_403_error_if_the_token_is_canceled(self):
         # Setup
         actions.register(Action1)
-        token = AccountActionTokenFactory.create(action='action-1', active=False)
+        token = AccountActionTokenFactory.create(action='action-1', is_canceled=True)
 
         user = User.objects.create_user(
             username='test', password='not_secret', email='test@exampe.com')
