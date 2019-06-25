@@ -2,6 +2,7 @@
 
 import datetime as dt
 
+from django.db.models import Q
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.utils import timezone
@@ -24,9 +25,7 @@ class PendingManager(BaseAccountActionTokenManager):
             days=account_actions_settings.ACTION_TOKEN_VALIDITY_DURATION)
 
         qs = super(PendingManager, self).get_queryset()
-        qs = qs.filter(
-            active=True, user__isnull=True, consumption_date__isnull=True, created__gte=dt_limit)
-
+        qs = qs.filter(Q(active=True) & Q(user__isnull=True) & Q(consumption_date__isnull=True) & Q(created__gte=dt_limit))
         return qs
 
 

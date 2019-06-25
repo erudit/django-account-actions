@@ -7,7 +7,7 @@ from django.utils import timezone
 import pytest
 
 from account_actions.models import AccountActionToken
-from account_actions.test.factories import AccountActionTokenFactory
+from account_actions.test.factories import AccountActionTokenFactory, ExpiredAccountActionTokenFactory
 
 
 @pytest.mark.django_db
@@ -15,15 +15,17 @@ class TestPendingManager(object):
     def test_can_return_the_pending_account_actions(self):
         # Setup
         token_1 = AccountActionTokenFactory.create()
-        token_2 = AccountActionTokenFactory.create()
-        token_2._meta.get_field('created').auto_now_add = False
-        token_2.created = timezone.now() - dt.timedelta(days=100)
-        token_2.save()
-        token_2._meta.get_field('created').auto_now_add = True
+        token_2 = ExpiredAccountActionTokenFactory.create()
         # Run
         tokens = AccountActionToken.pending_objects.all()
         # Check
         assert list(tokens) == [token_1, ]
+
+    def test_an_expired_account_action_is_not_pending(self):
+        token_1 = ExpiredAccountActionTokenFactory()
+        tokens = AccountActionToken.pending_objects.all()
+
+        assert list(tokens) == []
 
     def test_can_return_the_pending_account_actions_for_a_specific_object(self):
         # Setup
