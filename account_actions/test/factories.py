@@ -24,6 +24,7 @@ class AccountActionTokenFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = AccountActionToken
 
+
 class ExpiredAccountActionTokenFactory(AccountActionTokenFactory):
 
     @factory.post_generation

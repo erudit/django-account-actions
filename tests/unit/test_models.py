@@ -34,9 +34,8 @@ class TestAccountActionToken(object):
         # Setup
         token = AccountActionTokenFactory.create()
         # Run & check
-        assert token.expiration_date == (
-            token.created +
-            dt.timedelta(days=account_actions_settings.ACTION_TOKEN_VALIDITY_DURATION))
+        assert token.expiration_date == (token.created + dt.timedelta(
+            days=account_actions_settings.ACTION_TOKEN_VALIDITY_DURATION))
 
     def test_can_indicate_if_it_is_expired(self):
         # Setup
@@ -104,8 +103,8 @@ class TestAccountActionToken(object):
         # Run & check
         assert not token.can_be_consumed
 
-    def test_knows_that_an_inactive_token_cannot_be_consumed(self):
+    def test_knows_that_a_canceled_token_cannot_be_consumed(self):
         # Setup
-        token = AccountActionTokenFactory.create(active=False)
+        token = AccountActionTokenFactory.create(is_canceled=True)
         # Run & check
         assert not token.can_be_consumed

@@ -26,8 +26,8 @@ class AccountActionToken(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name=_('Creation date'))
     updated = models.DateTimeField(auto_now=True, verbose_name=_('Update date'))
 
-    # An account action token can be set to inactive.
-    active = models.BooleanField(verbose_name=_('Is active'), default=True)
+    # An account action token can be canceled.
+    is_canceled = models.BooleanField(verbose_name=_('Canceled'), default=False)
 
     # The 'user' foreign key should be filled only when the action token is consumed.
     consumption_date = models.DateTimeField(
@@ -70,7 +70,7 @@ class AccountActionToken(models.Model):
 
     def cancel(self):
         """ Cancels the token. """
-        self.active = False
+        self.is_canceled = True
         self.save()
 
     def consume(self, user):
@@ -94,7 +94,7 @@ class AccountActionToken(models.Model):
     @property
     def can_be_consumed(self):
         """ Returns a boolean indicating if the action can be consumed. """
-        return self.active and not self.is_expired and not self.is_consumed
+        return not self.is_canceled and not self.is_expired and not self.is_consumed
 
     @property
     def expiration_date(self):
