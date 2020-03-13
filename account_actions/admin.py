@@ -3,7 +3,7 @@ import datetime as dt
 
 from django.contrib import admin
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from .conf import settings as account_actions_settings
 from .models import AccountActionToken
