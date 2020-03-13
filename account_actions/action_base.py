@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import inspect
 
 from django.core.exceptions import ImproperlyConfigured
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 import six
 
 from .core.compat import with_metaclass
