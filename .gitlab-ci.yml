@@ -1,8 +1,6 @@
 build:
   stage: build
-  image: python:3.6
-  before_script:
-    - pip install twine
+  image: gitlab.erudit.org:4567/erudit/ti/infra/twine
   script:
     - python setup.py sdist bdist_wheel
     - TWINE_PASSWORD=${CI_JOB_TOKEN} TWINE_USERNAME=gitlab-ci-token python -m twine upload --repository-url https://gitlab.erudit.org/api/v4/projects/332/packages/pypi dist/*
