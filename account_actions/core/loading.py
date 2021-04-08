@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
-import imp
 from importlib import import_module
+from importlib.machinery import PathFinder
 
 from django.conf import settings
 
@@ -17,10 +17,8 @@ def load(modname):
         except AttributeError:  # pragma: no cover
             return
 
-        # Use imp.find_module to find the app's modname.py
-        try:
-            imp.find_module(modname, app_path)
-        except ImportError:  # pragma: no cover
+        # Use importlib's PathFinder().find_spec() to find the app's modname.py
+        if PathFinder().find_spec(modname, app_path) is None:
             return
 
         # Import the app's module file
